@@ -30,6 +30,8 @@
 
                 <th>User</th>
 
+                <th>Status</th>
+
                 <th>Action</th>
 
             </tr>
@@ -49,6 +51,14 @@
                 <td>{{ $value->recipient }}</td>
 
                 <td>{{ $value->user->name }} {{ $value->user->last_name }}</td>
+
+                <td>
+					@if ($value->is_draft)
+						Not sent
+					@else
+						Sent
+					@endif
+                </td>
 
                 <td>
 
