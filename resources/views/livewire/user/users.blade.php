@@ -1,8 +1,10 @@
 <div>
 
-    @include('livewire.create')
+    @include('livewire.user.create')
 
-    @include('livewire.update')
+    @include('livewire.user.update')
+    
+    <input wire:model="search" type="search" class="bg-light border-1 medium" placeholder="Search by name, ...">
 
     @if (session()->has('message'))
 
@@ -13,8 +15,16 @@
         </div>
 
     @endif
-    
-    <input wire:model="search" type="search" class="bg-light border-1 medium" placeholder="Search by name, ...">
+
+    @if (session()->has('warning'))
+
+        <div class="alert alert-warning" style="margin-top:30px;">x
+
+          {{ session('warning') }}
+
+        </div>
+
+    @endif
 
     <table class="table table-bordered mt-8">
 

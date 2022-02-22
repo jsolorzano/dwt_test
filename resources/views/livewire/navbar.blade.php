@@ -29,9 +29,21 @@
 						</li>
 					@endif
 				@else
-					@if (Route::has('users'))
+					@if (Route::has('home'))
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('home') }}">Home</a>
+						</li>
+					@endif
+					
+					@if (Route::has('users'))
+						<li class="nav-item">
+							<a class="nav-link" href="{{ route('users') }}">Users</a>
+						</li>
+					@endif
+					
+					@if (Route::has('mails'))
+						<li class="nav-item">
+							<a class="nav-link" href="{{ route('mails') }}">Mails</a>
 						</li>
 					@endif
 					<!--<li class="nav-item dropdown">

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User;
+use App\Models\Mail;
 use Illuminate\Support\Facades\Hash;
 
 class Users extends Component
@@ -51,7 +52,7 @@ class Users extends Component
      */
     public function render()
     {
-        return view('livewire.users', [
+        return view('livewire.user.users', [
             'list_users' => User::where('name', 'like', '%'.$this->search.'%')
             ->orWhere('last_name', 'like', '%'.$this->search.'%')
             ->orWhere('email', 'like', '%'.$this->search.'%')
@@ -103,7 +104,7 @@ class Users extends Component
 
         User::create($validatedDate);
 
-        session()->flash('message', 'Users Created Successfully.');
+        session()->flash('message', 'User Created Successfully.');
 
         $this->resetInputFields();
 
@@ -197,7 +198,7 @@ class Users extends Component
 
             $this->updateMode = false;
 
-            session()->flash('message', 'Users Updated Successfully.');
+            session()->flash('message', 'User Updated Successfully.');
 
             $this->resetInputFields();
 
@@ -208,7 +209,7 @@ class Users extends Component
     }
 	
 	/**
-     * Delete a user instance and sets a message in session.
+     * Delete a user instance if he has no mails and sets a message in session.
      *
      * @return void
      */
@@ -217,9 +218,19 @@ class Users extends Component
 
         if($id){
 
-            User::where('id',$id)->delete();
+            $mails = Mail::where('user_id', $id)->get();
+            
+            if($mails->isEmpty()){
 
-            session()->flash('message', 'Users Deleted Successfully.');
+				User::where('id', $id)->delete();
+
+				session()->flash('message', 'User Deleted Successfully.');
+            
+			}else{
+				
+				session()->flash('warning', 'User not deleted (Has associated mails).');
+				
+			}
 
         }
 
