@@ -26,6 +26,8 @@ class CreateUsersTable extends Migration
             $table->integer('city')->default(0);
             $table->rememberToken();
             $table->timestamps();
+            $table->boolean('is_staff')->default(false);
+            $table->boolean('is_admin')->default(false);
         });
     }
 
