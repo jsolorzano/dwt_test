@@ -59,6 +59,8 @@ php artisan serve
 
 _If you have reached this point, you can load the site with the url indicated in the console._
 
+_Test username and password: solorzano202009@gmail.com | admin123._
+
 
 
 ---
